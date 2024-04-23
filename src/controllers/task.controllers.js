@@ -34,8 +34,8 @@ const updateTask = asyncHandler(async (req, res) => {
   }
 
   if (task.user.toString() !== user.id) {
-    res.status(401);
-    throw new Error('User is not authorized to update')
+    res.status(403);
+    throw new Error('User does not have permission to update task')
   }
 
   const updateTask = await Task.findByIdAndUpdate(req.params.id, req.body, { new: true });
